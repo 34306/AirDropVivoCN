@@ -1,0 +1,10 @@
+<!--
+    Input:
+        vendor/vivo/common/QuickShareExtension/manifest_mosey.xml
+-->
+<manifest version="9.0" type="framework">
+    <hal format="aidl">
+        <name>com.google.android.moseyservice</name>
+        <fqname>IMoseyService/default</fqname>
+    </hal>
+</manifest>

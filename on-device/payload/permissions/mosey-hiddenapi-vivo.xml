@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mosey calls the hidden android.os.ServiceManager.waitForDeclaredService().
+     SystemConfig honours this tag from /product/etc/permissions only for system
+     apps, so it takes effect together with the priv-app overlay. -->
+<config>
+    <hidden-api-whitelisted-app package="com.google.android.mosey" />
+</config>

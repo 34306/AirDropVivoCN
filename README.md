@@ -7,24 +7,21 @@ support Vivo X300 Ultra able to use QuickShare and AirDrop. There will be 2 vers
 #### The steps will be
 
 #### On macOS:
-- Download 2 root APK i listed in credits and then run to get root.
-- Enable adb root
+- Download 2 root APK i listed in credits and then run to get root
+- Enable adb root in KernelSU settings
 - Plug your device into your Mac
 - `brew install android-platform-tools` (pls install homebrew if you dont have it)
-- Clone this repo or download it as zip, then cd to macos/ folder
-- Run ./airdrop.sh
+- Clone this repo or download it as zip, then cd to `macos/` folder
+- Run `./airdrop.sh`
 - Enjoy!
 
 #### On device:
-- Download 2 root APK i listed in credits and then run to get root.
-- Clone this repo and take the on-device thing.
+- Download 2 root APK i listed in credits and then run to get root
+- Clone this repo and take the on-device thing
 - Load it by `ksud late-load`
 - Enjoy?
-
-
 I'm based iOS so this is my random time i do an Android project, it might f up something so please point me out. PR are welcome (?).
  
-
 # Credits
 For root, please install these 2 apk:
 [DFRoot](https://github.com/diabl0w/DFRoot/releases/tag/v4.1)

@@ -1,0 +1,6 @@
+id=vivo-x300u-airdrop
+name=vivo X300 Ultra CN AirDrop
+version=1.0.0
+versionCode=1
+author=vivo-x300u-cn-airdrop
+description=AirDrop through Google Quick Share (Mosey) on the vivo X300 Ultra CN (V2547A). Read-only overlays and binds only: no system partition is written or remounted, and a reboot restores everything.

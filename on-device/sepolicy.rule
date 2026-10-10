@@ -1,0 +1,7 @@
+allow priv_app default_android_service service_manager find;
+allow priv_app ksu binder { call transfer };
+allow priv_app ksu fd use;
+allow servicemanager ksu binder { call transfer };
+allow servicemanager ksu dir search;
+allow servicemanager ksu file { read open };
+allow servicemanager ksu process getattr;

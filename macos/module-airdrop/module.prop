@@ -1,0 +1,6 @@
+id=vivo_airdrop
+name=AirDrop for vivo X300 Ultra CN
+version=1.0
+versionCode=1
+author=airdrop_vivo
+description=When root is late-loaded after a reboot, brings up the Quick Share AirDrop stack from /data/local/tmp/airdrop (installed by airdrop.sh). Everything stays in RAM.
