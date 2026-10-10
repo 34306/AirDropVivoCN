@@ -1,6 +1,6 @@
 # AirDropVivoCN
 
-> NOTE: DO IT AT YOUR OWN RISK!
+> NOTE: DO IT AT YOUR OWN RISK! ALSO YOU NEED TO REDO THIS ONCE REBOOT BECAUSE THIS IS A TEMP ROOT, NOT PERSIST!
 
 support Vivo X300 Ultra able to use QuickShare and AirDrop. There will be 2 versions: 1 is the .sh for macOS (which i enable over adb root shell) and other version is for on device.
 
@@ -20,6 +20,8 @@ support Vivo X300 Ultra able to use QuickShare and AirDrop. There will be 2 vers
 - Clone this repo and take the on-device thing
 - Load it by `ksud late-load`
 - Enjoy?
+
+
 I'm based iOS so this is my random time i do an Android project, it might f up something so please point me out. PR are welcome (?).
  
 # Credits
