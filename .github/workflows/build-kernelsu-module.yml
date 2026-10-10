@@ -1,0 +1,74 @@
+name: Build KernelSU module
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Read module metadata
+        id: meta
+        working-directory: on-device
+        run: |
+          set -euo pipefail
+          id=$(sed -n 's/^id=//p' module.prop | head -n1)
+          version=$(sed -n 's/^version=//p' module.prop | head -n1)
+          version_code=$(sed -n 's/^versionCode=//p' module.prop | head -n1)
+          [ -n "$id" ] && [ -n "$version" ] && [ -n "$version_code" ] \
+            || { echo "::error::module.prop is missing id/version/versionCode"; exit 1; }
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "zip=$id-$version-$version_code.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Build module zip
+        working-directory: on-device
+        env:
+          ZIP: ${{ github.workspace }}/dist/${{ steps.meta.outputs.zip }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$(dirname "$ZIP")"
+
+          # The installer (customize.sh) and the boot hooks (bin/common.sh) both
+          # verify the payload against payload/SHA256SUMS, so the list has to
+          # match the module's contents exactly: same paths, same file set.
+          # Paths are relative to payload/ (no leading ./), sorted, and exclude
+          # the list itself and the macOS .DS_Store junk the runner ignores.
+          ( cd payload
+            find . -type f ! -name SHA256SUMS ! -name '.DS_Store' \
+              | sed 's|^\./||' | LC_ALL=C sort \
+              | while IFS= read -r f; do sha256sum -- "$f"; done > SHA256SUMS )
+
+          # KernelSU reads module.prop at the zip root, so archive the module
+          # directory contents (not the directory itself) and drop .DS_Store.
+          zip -rq9 "$ZIP" . -x '*.DS_Store'
+
+          unzip -Z1 "$ZIP" | sed 's|^\./||' | grep -qx 'module.prop' \
+            || { echo "::error::module.prop is not at the zip root"; exit 1; }
+          ( cd payload && sha256sum -c --status SHA256SUMS )
+          echo "built $(basename "$ZIP") ($(du -h "$ZIP" | cut -f1))"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.id }}-${{ steps.meta.outputs.version }}
+          path: dist/${{ steps.meta.outputs.zip }}
+          if-no-files-found: error
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/${{ steps.meta.outputs.zip }}
+          generate_release_notes: true
