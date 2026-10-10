@@ -2,7 +2,7 @@
 
 > NOTE: DO IT AT YOUR OWN RISK! ALSO YOU NEED TO REDO THIS ONCE REBOOT BECAUSE THIS IS A TEMP ROOT, NOT PERSIST!
 
-support Vivo X300 Ultra able to use QuickShare and AirDrop. There will be 2 versions: 1 is the .sh for macOS (which i enable over adb root shell) and other version is for on device.
+support Vivo X300 Ultra running OriginOS 6 (PD2547E_A_16.0.22.11.W10.V000L1 and older, for the root) able to use QuickShare and AirDrop. There will be 2 versions: 1 is the .sh for macOS (which i enable over adb root shell) and other version is for on device.
 
 #### The steps will be
 
